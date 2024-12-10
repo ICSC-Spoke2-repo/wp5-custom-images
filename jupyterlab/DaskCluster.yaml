@@ -27,7 +27,7 @@ spec:
         - --host
         - 0.0.0.0
         env: []
-        image: ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-fastcv-v0.0.1
+        image: ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-fastcv-v0.1.0
         livenessProbe:
           httpGet:
             path: /health
@@ -77,7 +77,7 @@ spec:
         - --dashboard-address
         - "8788"
         env: []
-        image: ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-fastcv-v0.0.1
+        image: ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-fastcv-v0.1.0
         name: worker
         ports:
         - containerPort: 8788
