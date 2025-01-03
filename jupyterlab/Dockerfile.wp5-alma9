@@ -34,7 +34,7 @@ RUN conda install -c conda-forge -y python=3.11.8 \
                                     root \
                                     coffea=0.7.22 \
                                     fsspec-xrootd \
-                                    vector
+                                    'vector<1.5.0'
 
 #RUN conda config --set channel_priority strict
 #RUN conda install -c conda-forge root
