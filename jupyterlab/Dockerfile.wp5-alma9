@@ -20,9 +20,9 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 # Put conda in path so we can use conda activate
 ENV PATH=$CONDA_DIR/bin:$PATH
 
-#RUN conda install conda-forge::conda-libmamba-solver conda-forge::libmamba conda-forge::libmambapy conda-forge::libarchive
+RUN conda install conda-forge::conda-libmamba-solver conda-forge::libmamba conda-forge::libmambapy conda-forge::libarchive
 RUN conda install -c conda-forge -y jupyterlab==4.0.9 \
-                                    nodejs==20.9.0 \
+                                    nodejs>=20.9.0 \
                                     jupyterhub==4.0.2 \
                                     dask==2023.11.0 \
                                     bokeh==3.3.0 \
@@ -30,7 +30,19 @@ RUN conda install -c conda-forge -y jupyterlab==4.0.9 \
                                     dask-labextension==7.0.0 \
                                     dask-kubernetes==2023.9.0 \
                                     kr8s==0.8.16 \
-                                    root
+                                    root \
+                                    ipykernel==6.29.5 \
+                                    umap-learn==0.5.7 \
+                                    matplotlib==3.9.2 \
+                                    numpy \ 
+                                    pandas==2.2.3 \ 
+                                    scipy==1.14.1 \
+                                    h5py==3.12.1 \
+                                    plotly==5.24.1 \
+                                    scikit-image==0.24.0 \
+                                    pyocclient==0.6 \
+                                    sqlite \
+                                    libsqlite
 
 #RUN conda config --set channel_priority strict
 #RUN conda install -c conda-forge root
@@ -76,11 +88,11 @@ RUN mkdir -p /.init \
 #    echo '{"@jupyterlab/apputils-extension:themes": {"theme":"Tailwind Light"}}'> ~/.jupyter/lab/settings/overrides.json
 
 #RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el9.noarch.rpm
-RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/10.x/htcondor-release-current.el9.noarch.rpm
+#RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/current/htcondor-release-current.el9.noarch.rpm
 
-RUN sed -i 's/current/8.9/g' /etc/yum.repos.d/htcondor.repo
+#RUN sed -i 's/current/8.9/g' /etc/yum.repos.d/htcondor.repo
 
-RUN yum install -y condor
+#RUN yum install -y condor
 
 #RUN conda install sqlite==2.6.0
 #RUN pip install --upgrade pysqlite
@@ -90,5 +102,9 @@ RUN yum install -y condor
 RUN sed -i 's/kwargs.pop("host_allowlist", \["localhost", "127.0.0.1"\])/lambda app, host: True/' /opt/conda/lib/python3.12/site-packages/jupyter_server_proxy/handlers.py
 
 WORKDIR /opt/workspace
+
+#RUN conda install "sqlite>=2.6.0"
+
+RUN conda install conda-forge::libsqlite --force-reinstall
 
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "base"]

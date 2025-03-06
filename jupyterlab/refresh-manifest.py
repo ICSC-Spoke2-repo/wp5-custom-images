@@ -15,9 +15,10 @@ while(True):
     random_suffix = generate_random_suffix()
     manifest["metadata"]["name"] =  "dask-" + os.environ.get("USERNAME") + "-" + random_suffix
     manifest["spec"]["scheduler"]["service"]["selector"]["dask.org/cluster-name"] = "dask-" + os.environ.get("USERNAME") + "-" + random_suffix
+    manifest["spec"]["scheduler"]["spec"]["containers"][0]["image"] = "ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-" + os.environ.get("IMAGE_TAG") 
+    manifest["spec"]["worker"]["spec"]["containers"][0]["image"] = "ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-" + os.environ.get("IMAGE_TAG") 
 
     with open("/opt/conda/lib/python3.12/site-packages/dask_labextension/DaskCluster.yaml", "w") as f:
         yaml.dump(manifest, f)
 
     sleep(10)
-
