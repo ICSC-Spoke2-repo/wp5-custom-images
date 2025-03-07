@@ -107,4 +107,7 @@ WORKDIR /opt/workspace
 
 RUN conda install conda-forge::libsqlite --force-reinstall
 
+ARG NOTEBOOK_VERSION
+ENV IMAGE_TAG=$NOTEBOOK_VERSION 
+
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "base"]
