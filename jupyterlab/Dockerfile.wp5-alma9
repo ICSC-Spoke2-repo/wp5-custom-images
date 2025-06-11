@@ -68,9 +68,9 @@ RUN yum search voms
 RUN yum install -y  apptainer voms-clients-cpp ca-policy-lcg
 
 
-RUN mkdir -p /.init \
-    && wget https://github.com/DODAS-TS/sts-wire/releases/download/v2.0.0/sts-wire_linux -O /.init/sts-wire \
-    && chmod +x /.init/sts-wire
+#RUN mkdir -p /.init \
+#    && wget https://github.com/DODAS-TS/sts-wire/releases/download/v2.0.0/sts-wire_linux -O /.init/sts-wire \
+#    && chmod +x /.init/sts-wire
 
 # Install tailwind css
 #RUN jupyter labextension install jupyterlab-tailwind-theme
@@ -79,13 +79,13 @@ RUN mkdir -p /.init \
 #    echo '{"@jupyterlab/apputils-extension:themes": {"theme":"Tailwind Light"}}'> ~/.jupyter/lab/settings/overrides.json
 
 #RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el9.noarch.rpm
-RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/10.x/htcondor-release-current.el9.noarch.rpm
+#RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/10.x/htcondor-release-current.el9.noarch.rpm
 
-RUN sed -i 's/current/8.9/g' /etc/yum.repos.d/htcondor.repo
+#RUN sed -i 's/current/8.9/g' /etc/yum.repos.d/htcondor.repo
 
-RUN yum install -y condor
+#RUN yum install -y condor
 
-RUN pip install setuptools==59.5.0
+#RUN pip install setuptools==59.5.0
 #RUN pip install --upgrade pysqlite
 
 #RUN jupyter lab build

@@ -11,16 +11,26 @@ spec:
       - name: tcp-comm
         port: 8786
         protocol: TCP
-        targetPort: tcp-comm
+        targetPort: 8786
       - name: http-dashboard
         port: 8787
         protocol: TCP
-        targetPort: http-dashboard
+        targetPort: 8787
       selector:
         dask.org/cluster-name: dask
         dask.org/component: scheduler
       type: ClusterIP
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                - vk-na
+                - vk-test
       containers:
       - args:
         - dask-scheduler
@@ -60,6 +70,16 @@ spec:
   worker:
     replicas: 0
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                - vk-na
+                - vk-test
       containers:
       - args:
         - dask-worker
