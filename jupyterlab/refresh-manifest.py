@@ -28,8 +28,10 @@ while(True):
     manifest["spec"]["scheduler"]["spec"]["containers"][0]['args'][2] = manifest["spec"]["scheduler"]["spec"]["containers"][0]['args'][2].replace("8912", str(random_scheduler_port)).replace("8913", str(random_dashboard_port)).replace("8914", str(random_privateip_port))
     manifest["spec"]["worker"]["spec"]["containers"][0]['env'][0]["value"] = manifest["spec"]["worker"]["spec"]["containers"][0]['env'][0]["value"].replace("8912", str(random_scheduler_port))
 
-    manifest["spec"]["scheduler"]["spec"]["containers"][0]["image"] = "ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-" + os.environ.get("IMAGE_TAG") 
-    manifest["spec"]["worker"]["spec"]["containers"][0]["image"] = "ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-" + os.environ.get("IMAGE_TAG") 
+    #manifest["spec"]["scheduler"]["spec"]["containers"][0]["image"] = "ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-" + os.environ.get("IMAGE_TAG") 
+    #manifest["spec"]["worker"]["spec"]["containers"][0]["image"] = "ghcr.io/icsc-spoke2-repo/jlab:wp5-alma9-" + os.environ.get("IMAGE_TAG") 
+    manifest["spec"]["scheduler"]["spec"]["containers"][0]["image"] = "/cvmfs/unpacked.cern.ch/ghcr.io/comp-dev-cms-ita/jupyterlab:v2-offload-highrate-v0.0.1" 
+    manifest["spec"]["worker"]["spec"]["containers"][0]["image"] = "/cvmfs/unpacked.cern.ch/ghcr.io/comp-dev-cms-ita/jupyterlab:v2-offload-highrate-v0.0.1" 
     manifest["spec"]["scheduler"]["spec"]['containers'][0]["env"][0]['value'] = os.getenv("JUPYTERHUB_USER")
     manifest["spec"]["scheduler"]["spec"]['containers'][0]["env"][1]['value'] = os.getenv("JUPYTERHUB_API_TOKEN")
 
