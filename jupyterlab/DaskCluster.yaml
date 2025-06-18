@@ -48,7 +48,7 @@ spec:
       volumes:
       - name: cvmfs
         hostPath:
-          path: /cvmfs-af-htcondor
+          path: /cvmfs
           type: Directory
       nodeSelector:
         kubernetes.io/hostname: vk-na
@@ -84,7 +84,7 @@ spec:
       volumes:
       - name: cvmfs
         hostPath:
-          path: /cvmfs-af-htcondor
+          path: /cvmfs
           type: Directory
       nodeSelector:
         kubernetes.io/hostname: vk-na
